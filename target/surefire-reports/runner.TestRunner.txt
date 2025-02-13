@@ -1,0 +1,40 @@
+-------------------------------------------------------------------------------
+Test set: runner.TestRunner
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 1.916 s <<< FAILURE! -- in runner.TestRunner
+Log In.Login with Sets of valid credentials #1 -- Time elapsed: 0.204 s <<< ERROR!
+io.cucumber.junit.UndefinedStepException: 
+The step 'User enter Email as <Email>' is undefined.
+You can implement this step using the snippet(s) below:
+
+@When("User enter Email as <Email>")
+public void userEnterEmailAsEmail() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+
+Log In.Login with Sets of valid credentials #2 -- Time elapsed: 0.062 s <<< ERROR!
+io.cucumber.junit.UndefinedStepException: 
+The step 'User enter Email as <Email>' is undefined.
+You can implement this step using the snippet(s) below:
+
+@When("User enter Email as <Email>")
+public void userEnterEmailAsEmail() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+
+Log In.Login with Sets of valid credentials #3 -- Time elapsed: 0.094 s <<< ERROR!
+io.cucumber.junit.UndefinedStepException: 
+The step 'User enter Email as <Email>' is undefined.
+You can implement this step using the snippet(s) below:
+
+@When("User enter Email as <Email>")
+public void userEnterEmailAsEmail() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+

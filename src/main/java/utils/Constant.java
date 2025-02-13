@@ -5,3 +5,4 @@ public enum Constant {
 	URL, PAGELOAD_WAIT, IMPLICITLY_WAIT, BROWSER, CHROME, FIREFOX, EDGE, SAFARI,user_id,password,email
 
 }
+

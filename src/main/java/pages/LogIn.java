@@ -34,6 +34,8 @@ public class LogIn {
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
+	
+	
 
 	@FindBy(xpath = "//a[@id='logo-id']")
 	WebElement logoElement;
@@ -142,25 +144,36 @@ public class LogIn {
 
 	}
 
-	public void user_id() {
+	public void email() {
 
 		clickElement(loginHeader);
 		pause(2000);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		inputTextThenClickTab(useremailElement, user_id);
+		inputTextThenClickTab(useremailElement,user_id);
 		pause(1000);
 	}
 
-	public void password_in() {
+	public void password() {
 
 		clickElement(loginHeader);
 		pause(2000);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		inputTextThenClickTab(useremailElement, password);
+		inputTextThenClickTab(userpassElement, password);
 		pause(1000);
 	}
+	
+	public void emailId(String string) {
+		inputText(useremailElement, string);
+		pause(2000);
+	}
+	
+	public void password(String string) {
+		inputText(userpassElement, string);
+		pause(2000);
+	}
+	
 
 	public void click_login_button() {
 
@@ -184,5 +197,6 @@ public class LogIn {
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/");
 
 	}
+	
 
 }
