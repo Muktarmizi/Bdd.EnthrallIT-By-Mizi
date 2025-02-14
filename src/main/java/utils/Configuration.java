@@ -2,6 +2,13 @@ package utils;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.io.InputStream;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
+
+
 
 public class Configuration {
 
@@ -30,3 +37,4 @@ public class Configuration {
 	}
 
 }
+

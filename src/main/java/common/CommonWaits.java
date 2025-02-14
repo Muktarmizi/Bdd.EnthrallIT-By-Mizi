@@ -21,7 +21,7 @@ public class CommonWaits {
 		this.wait = wait;
 	}
 	
-	public static void waitUntilConditionThenClick(WebDriver driver, WebElement element) {
+	public static void waitUntilTheConditionThenClick(WebDriver driver, WebElement element) {
 		try {
 			wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 			wait.until(ExpectedConditions.elementToBeClickable(element)).click();

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Cucumber" time="0.808" tests="5" skipped="0" failures="3" errors="0">
+<testcase classname="Log In" name="" time="0.063">
+<system-out><![CDATA[
+Given User is on the enthrall IT Homepage URL...............................passed
+When User click on Login Button navigated to Login Page.....................passed
+And User enter Email in the Email field.....................................passed
+And User enter Password in the Password field...............................passed
+And User finally click on Login Button......................................passed
+Then User will navigate to DashBoard Page...................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Log In" name="Login with fixed valid credentials" time="0.009">
+<system-out><![CDATA[
+Given User is on the enthrall IT Homepage URL...............................passed
+When User click on Login Button navigated to Login Page.....................passed
+And User enter UserId as 'Mizimuktar0@gmail.com'............................passed
+And User enter Password as 'Password$1'.....................................passed
+And User finally click on Login Button......................................passed
+Then User will navigate to DashBoard Page...................................passed
+]]></system-out>
+</testcase>
+<testcase classname="Log In" name="Login with Sets of valid credentials - #1.1" time="0.02">
+<failure/>
+<system-out><![CDATA[
+Given User is on the enthrall IT Homepage URL...............................passed
+When User click on Login Button to navigate to login page...................passed
+When User enter Email as <Email>............................................undefined
+And User enter Password as 'password$1'.....................................skipped
+And User finally click on Login Button......................................skipped
+Then User will navigate to DashBoard Page...................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Log In" name="Login with Sets of valid credentials - #1.2" time="0.029">
+<failure/>
+<system-out><![CDATA[
+Given User is on the enthrall IT Homepage URL...............................passed
+When User click on Login Button to navigate to login page...................passed
+When User enter Email as <Email>............................................undefined
+And User enter Password as 'Faizan2026#'....................................skipped
+And User finally click on Login Button......................................skipped
+Then User will navigate to DashBoard Page...................................skipped
+]]></system-out>
+</testcase>
+<testcase classname="Log In" name="Login with Sets of valid credentials - #1.3" time="0.014">
+<failure/>
+<system-out><![CDATA[
+Given User is on the enthrall IT Homepage URL...............................passed
+When User click on Login Button to navigate to login page...................passed
+When User enter Email as <Email>............................................undefined
+And User enter Password as 'saimun388556Bd@'................................skipped
+And User finally click on Login Button......................................skipped
+Then User will navigate to DashBoard Page...................................skipped
+]]></system-out>
+</testcase>
+</testsuite>

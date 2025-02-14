@@ -6,16 +6,23 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import pages.Enrollment_process;
 import pages.LogIn;
 import utils.Configuration;
 import static utils.IConstant.*;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 public class BaseClass {
 	public static WebDriver driver;
 	Configuration configuration;
 	public static LogIn logIn;
-
+	public static Enrollment_process enrollment_process;
 	
+
 	public void setUp() {
 		configuration = new Configuration();
 		initDriver();
@@ -54,9 +61,9 @@ public class BaseClass {
 			break;
 		}
 	}
-
-	public void initClass(WebDriver driver) {
+	public void initClass(WebDriver driver) { 
 		logIn = new LogIn(driver);
+		enrollment_process = new Enrollment_process(driver);
 	}
 
 	public void tearUp() {

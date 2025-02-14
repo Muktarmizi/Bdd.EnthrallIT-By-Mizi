@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
 import java.util.Set;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -21,6 +22,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.io.Files;
 import constants.Attribute;
 
+
 public class CommonActions {
 	static Logger logger = LoggerFactory.getLogger(CommonActions.class);
 	WebDriver driver;
@@ -28,6 +30,7 @@ public class CommonActions {
 	public CommonActions(WebDriver driver) {
 		this.driver = driver;
 	}
+	
 	
 	public static void elementDisplayed(WebElement element) {
 
@@ -366,7 +369,7 @@ public class CommonActions {
 		}
 	}
 	
-	public static void verifyErrorMessageTopOfThePage (WebElement element, Attribute attribute, String expectedErrorMessage) {
+	public static void verifyErrorMessageOnTheTopOfThePage (WebElement element, Attribute attribute, String expectedErrorMessage) {
 		try {
 			String actualErrorMessage = getAttributeValue(element, attribute) + " is a required field.";
 			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + " and Expected Error Message : " + expectedErrorMessage);

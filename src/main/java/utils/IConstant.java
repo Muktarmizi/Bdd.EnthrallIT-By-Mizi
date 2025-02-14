@@ -17,6 +17,4 @@ public interface IConstant {
 	String password= "Password$1";
 	String email="Mizimuktar0@gmail.com";
 
-	
-
-}
+	}
