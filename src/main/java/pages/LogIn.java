@@ -164,17 +164,15 @@ public class LogIn {
 		pause(1000);
 	}
 	
-	public void emailId(String string) {
-		inputText(useremailElement, string);
-		pause(2000);
+	public void emailId(String email) {
+	    inputText(useremailElement, email);
+	    pause(2000);
 	}
-	
-	public void password(String string) {
-		inputText(userpassElement, string);
-		pause(2000);
-	}
-	
 
+	public void password(String password) {
+	    inputText(userpassElement, password);
+	    pause(2000);
+	}
 	public void click_login_button() {
 
 		clickElement(loginHeader);

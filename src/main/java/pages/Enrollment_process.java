@@ -25,10 +25,12 @@ import static utils.IConstant.password;
 import static utils.IConstant.user_id;
 
 import java.io.File;
+import java.security.PublicKey;
 import java.time.Duration;
 import java.util.List;
 
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -471,7 +473,7 @@ public class Enrollment_process {
 
 	}
 	
-	public void happy_path_puting_value_in_each_field_on_enroll_home_page() {
+	public void happy_path_enters_valid_details_in_each_required_field_for_enrollment() {
 		
 		pause(2000);
 		clickElement(firstnameElement);
@@ -649,21 +651,14 @@ public class Enrollment_process {
 	}
 
 	
-	public void navigate_to_Successful_page() {
+	public void submitEnrollment() {
 		pause(2000);
 		clickElement(submitEnrollPagElement);
 		pause(2000);
-	    pause(2000);
-		verifyCurrentUrl(driver, "https://enthrallit.com/course/enroll/success/");
-		verifyTitle(driver, "Registration Success");
-		validationOfSubHeader(successsfull, "Registration Successful!");
 	}
 	
 	
-	
-	
-	
-	public void double_click_to_the_terms_and_condition() {
+	public void acceptTerms() {
 
 		pause(2000);
 		//scrollIntoViewTheElementUsingJavascriptExecutor(driver, signtureElement);
@@ -675,4 +670,36 @@ public class Enrollment_process {
 		pause(2000);
 
 	}
+	
+	public boolean is_Success_Page_Displayed() {
+	    pause(2000); // Pause if needed, but better to use explicit waits
+
+	    // Verify if the current URL is correct
+	    String expectedUrl = "https://enthrallit.com/course/enroll/success/";
+	    String actualUrl = driver.getCurrentUrl();
+	    if (!actualUrl.equals(expectedUrl)) {
+	        System.out.println("URL mismatch! Expected: " + expectedUrl + ", but found: " + actualUrl);
+	        return false;
+	    }
+
+	    // Verify the page title
+	    String expectedTitle = "Registration Success";
+	    String actualTitle = driver.getTitle();
+	    if (!actualTitle.equals(expectedTitle)) {
+	        System.out.println("Title mismatch! Expected: " + expectedTitle + ", but found: " + actualTitle);
+	        return false;
+	    }
+
+	    // Validate the success message
+	    String expectedSuccessMessage = "Registration Successful!";
+	    WebElement successMessageElement = driver.findElement(By.xpath("//h1[contains(text(),'Registration Successful!')]"));
+	    
+	    if (successMessageElement.isDisplayed() && successMessageElement.getText().equals(expectedSuccessMessage)) {
+	        return true;
+	    } else {
+	        System.out.println("Success message mismatch or not displayed!");
+	        return false;
+	    }
+	}
+
 	}
