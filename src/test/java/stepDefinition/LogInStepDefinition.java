@@ -47,15 +47,38 @@ public class LogInStepDefinition extends BaseClass {
 	public void user_will_navigate_to_dash_board_page() {
 		logIn.landing_on_dashboard();
 	}
-
-	@When("User enters email as {string}")
-	public void user_enters_email_as(String email) {
-	    logIn.emailId(email);
+	
+	@When("User enter UserId as {string}")
+	public void userEnterUserIdAs(String string) {
+		logIn.emailId(string);
+	}
+	@When("User enter Password as {string}")
+	public void userEnterPasswordAs(String string) {
+		logIn.password(string);
+	}
+	
+	@When("User enter UserId  as {string}")
+	public void userEnterUserId(String string) {
+		logIn.emailId(string);
+	  
 	}
 
-	@When("User enters password as {string}")
-	public void user_enters_password_as(String password) {
-	    logIn.password(password);
-	}
+
+
 
 }
+
+/*
+ * @When("User enters UserId as {string}")
+	public void user_enters_email_as(String string) {
+	    logIn.emailId(string);
+	}
+
+	@When("User enters Password as {string}")
+	public void user_enters_password_as(String string) {
+	    logIn.password(string);
+	}
+ * 
+ * 
+ * 
+ */

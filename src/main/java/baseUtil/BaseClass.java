@@ -9,18 +9,19 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.Enrollment_process;
 import pages.LogIn;
 import utils.Configuration;
+import utils.Configuration.*;
 import static utils.IConstant.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 	public static WebDriver driver;
 	Configuration configuration;
+	// Make below classes static to avoid NullPointerException
 	public static LogIn logIn;
 	public static Enrollment_process enrollment_process;
 
+	// We don't use annotation here. Annotation is used in hook class
+	// because step definition class extends base class, if base class contains annotation,
+	// it will show exception [Null Pointer] because step definition class contain annotation too
 	public void setUp() {
 		configuration = new Configuration();
 		initDriver();
@@ -54,16 +55,16 @@ public class BaseClass {
 			break;
 
 		default:
-			WebDriverManager.chromedriver().setup();
-			driver = new ChromeDriver();
+			WebDriverManager.edgedriver().setup();
+			driver = new EdgeDriver();
 			break;
 		}
 	}
 
 	public void initClass(WebDriver driver) {
 		logIn = new LogIn(driver);
-		enrollment_process = new Enrollment_process(driver);
-	}
+	   enrollment_process = new Enrollment_process(driver);
+	   }
 
 	public void tearUp() {
 		driver.quit();

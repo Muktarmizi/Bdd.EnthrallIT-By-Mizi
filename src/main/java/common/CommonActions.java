@@ -22,6 +22,13 @@ import org.slf4j.LoggerFactory;
 import com.google.common.io.Files;
 import constants.Attribute;
 
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+
+
+
+
+
 
 public class CommonActions {
 	static Logger logger = LoggerFactory.getLogger(CommonActions.class);
@@ -68,7 +75,7 @@ public class CommonActions {
 		try {
 			String actualTitle = driver.getTitle();
 			logger.info("Actual Title is : " + actualTitle + " ---> And Expected Title is :" + expectedTitle);
-			// Assert
+			Assertions.assertEquals(actualTitle, expectedTitle, "Title doesn't match up");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			logger.info("Driver is not initiated properly Or Home Page Title doesn't match");			
@@ -78,13 +85,14 @@ public class CommonActions {
 	public static void verifyCurrentUrl(WebDriver driver, String expectedURL) {
 		String currentURL = driver.getCurrentUrl();
 		logger.info("Current URL : " + currentURL + ", Expected URL : " + expectedURL);
-		////Assert.//AssertEquals("Current URL is not correct", expectedURL, currentURL);
+		Assertions.assertEquals(expectedURL, currentURL, "Current URL is not correct");
 	}
-
+	
+	
 	public static void verifyTextOfTheWebElement(WebElement element, String expected) {
 		String actual = element.getText();
 		logger.info(element + " ---> Actual text : " + actual + ". Expected text : " + expected);
-		//Assert.AssertEquals("Text In the WebElement doesn't match", expected, actual);
+		Assertions.assertEquals("Text In the WebElement doesn't match", expected, actual);
 	}
 
 	// common method for click ()
@@ -139,20 +147,20 @@ public class CommonActions {
 
 	public static void validationOfHeader(WebElement element, String expectedHeader) {
 		String actualHeader = element.getText();
-		////Assert.//AssertEquals("Header doesn't match", expectedHeader, actualHeader);
+		Assertions.assertEquals("Header doesn't match", expectedHeader, actualHeader);
 		logger.info(element + " ---> Actual Header : " + actualHeader + ". Expected Header : " + expectedHeader);
 	}
 
 	public static void validationOfSubHeader(WebElement element, String expectedSubHeader) {
 		String actualSubHeader = element.getText();
-		////Assert.//AssertEquals("Sub Header doesn't match", expectedSubHeader, actualSubHeader);
+		Assertions.assertEquals("Sub Header doesn't match", expectedSubHeader, actualSubHeader);
 		logger.info(element + " ---> Actual Sub Header : " + actualSubHeader + ". Expected SubHeader : "
 				+ expectedSubHeader);
 	}
 
 	public static void validationOfOtherHeader(WebElement element, String expectedOtherHeader) {
 		String actualOtherHeader = element.getText();
-		////Assert.//AssertEquals("Other Header doesn't match", expectedOtherHeader, actualOtherHeader);
+		Assertions.assertEquals("Other Header doesn't match", expectedOtherHeader, actualOtherHeader);
 		logger.info(element + " ---> Actual Other Header : " + actualOtherHeader + ". Expected Other Header : "
 				+ expectedOtherHeader);
 	}
@@ -165,7 +173,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -178,7 +186,8 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			////Assert.fail();
+			Assert.fail();
+			
 		}
 	}
 
@@ -194,7 +203,7 @@ public class CommonActions {
 		} catch (NullPointerException | NoSuchElementException e) { // elements er exception add korte hobe
 			e.printStackTrace();
 			logger.info(element + " : This element Not Found");
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -206,7 +215,7 @@ public class CommonActions {
 		} catch (NullPointerException | NoSuchElementException e) {
 			e.printStackTrace();
 			logger.info(element + " : This element Not Found");
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -219,7 +228,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -230,7 +239,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -241,7 +250,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -259,7 +268,7 @@ public class CommonActions {
 	// very very important interview question
 	public void failText() {
 		logger.info(getClass().getMethods()[0].getName() + " ---> has failed");
-		//Assert.fail();
+		Assert.fail();
 	}
 
 	// very very important interview question
@@ -308,7 +317,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -340,20 +349,22 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			Assert.fail();
 		}
 		return value;		
+	
 	}
 	
 	public static void verifyLengthOfTheFieldContent (WebElement element, Attribute attribute, String expectedLength) {
 		try {
 			String actualLength = getAttributeValue(element, Attribute.MAX_LENGTH);
 			logger.info("The field " + element + " ---> has Actual Length : " + actualLength + "and Expected Length : " + expectedLength);
-			//Assert.//AssertEquals(actualLength, expectedLength, "Length doesn't match");
+             Assertions.assertEquals(actualLength, expectedLength, "Length doesn't match");
+			
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 	
@@ -361,11 +372,11 @@ public class CommonActions {
 		try {
 			String actualErrorMessage = getAttributeValue(element, attribute);
 			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + "and Expected Error Message : " + expectedErrorMessage);
-			//Assert.//AssertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
+			 Assertions.assertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 	
@@ -373,11 +384,11 @@ public class CommonActions {
 		try {
 			String actualErrorMessage = getAttributeValue(element, attribute) + " is a required field.";
 			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + " and Expected Error Message : " + expectedErrorMessage);
-			//Assert.//AssertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
+			 Assertions.assertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 	

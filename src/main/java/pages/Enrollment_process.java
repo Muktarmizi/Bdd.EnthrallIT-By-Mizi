@@ -430,7 +430,13 @@ public class Enrollment_process {
 	@FindBy(xpath = "//h1[text()='Registration Successful!']")
 	WebElement successsfull;
 	
-
+	@FindBy(xpath = "//h1[text()='Registration Successful!']")
+	WebElement Registration_Successful;
+	
+	@FindBy(xpath = "//p[text()='Thank you for registering. You will receive a confirmation email shortly.']")
+	WebElement Thank_you_for_registering;
+	
+	
 	
 	
 	public void landing_on_dashboard() {
@@ -655,13 +661,23 @@ public class Enrollment_process {
 		pause(2000);
 		clickElement(submitEnrollPagElement);
 		pause(2000);
+		pause(2000);
+		verifyCurrentUrl(driver, "https://enthrallit.com/course/enroll/success/");
+		pause(2000);
+		verifyTitle(driver,"Registration Success");
+		pause(2000);
+		validationOfHeader(Registration_Successful, "Registration Successful!");
+		pause(2000);
+		validationOfSubHeader(Thank_you_for_registering,"Thank you for registering. You will receive a confirmation email shortly.");
+		pause(2000);
+		
 	}
 	
 	
 	public void acceptTerms() {
 
 		pause(2000);
-		//scrollIntoViewTheElementUsingJavascriptExecutor(driver, signtureElement);
+		//scrollIntoViewToTheElementUsingJavascriptExecutor(driver, signtureElement);
 		pause(2000);
 		Actions actions = new Actions(driver);
 		actions.doubleClick(terms_and_condition).build().perform();
@@ -671,7 +687,23 @@ public class Enrollment_process {
 
 	}
 	
-	public boolean is_Success_Page_Displayed() {
+	
+	public void  is_Success_Page_Displayed() {
+		
+		pause(2000);
+		verifyCurrentUrl(driver, "https://enthrallit.com/course/enroll/success/");
+		pause(2000);
+		verifyTitle(driver,"Registration Success");
+		pause(2000);
+		validationOfHeader(Registration_Successful, "Registration Successful!");
+		pause(2000);
+		validationOfSubHeader(Thank_you_for_registering,"Thank you for registering. You will receive a confirmation email shortly.");
+		pause(2000);
+		
+	}
+	
+	
+	public boolean is_Success_Page_Displayed_boolean() {
 	    pause(2000); // Pause if needed, but better to use explicit waits
 
 	    // Verify if the current URL is correct

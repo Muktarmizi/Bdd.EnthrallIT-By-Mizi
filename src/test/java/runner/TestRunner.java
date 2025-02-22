@@ -4,18 +4,15 @@ import org.junit.runner.RunWith;
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags =  "@sanity or @regression" ,
+		tags =  "@smoke or @sanity or @regression or @login" ,
 		features = "src/test/java/feature",
 		glue = {"stepDefinition", "baseUtil" },
-		monochrome = true,
+		monochrome = false,
 		dryRun = false,
 		plugin = {"pretty", "html:target/report.html", "json:target/report.json", "junit:target/report.xml"}
 		)
@@ -23,10 +20,8 @@ public class TestRunner {
 
 }
 
+
 /*
- * html:target/cucumber-reports/report.html", 
-        "json:target/cucumber-reports/report.json"
-    
     html:target/report.html", "json:target/report.json", "junit:target/report.xml
  */
 

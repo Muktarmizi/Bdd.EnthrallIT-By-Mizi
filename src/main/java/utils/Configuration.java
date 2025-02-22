@@ -2,16 +2,10 @@ package utils;
 
 import java.io.IOException;
 import java.util.Properties;
-import java.io.InputStream;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
-
-
-
 
 public class Configuration {
-
+	// The Properties class represents a persistent set of properties.
+	// private access modifier help us to restrict it's property in the same class
 	private Properties properties = new Properties();
 	
 	// This is a default Constructor
@@ -37,4 +31,3 @@ public class Configuration {
 	}
 
 }
-

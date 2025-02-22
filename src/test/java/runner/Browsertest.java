@@ -14,8 +14,8 @@ public class Browsertest {
 	    WebDriver driver;
 
 	    @Before
-	    public void setUp() {
-	        WebDriverManager.chromedriver().setup(); // WebDriverManager handles ChromeDriver installation
+	    public void setUp() {    // WebDriverManager handles ChromeDriver installation
+	        WebDriverManager.chromedriver().setup();
 	        driver = new ChromeDriver();
 	    }
 
