@@ -1,9 +1,8 @@
 #Author: mizimuktar0@gmail.com
 #Date : 02/07/2025
 #Time : 01:11am
-
 @login
- Feature: Log In
+Feature: Log In
   As an user
   I want to login with my valid credentials to Enthrall IT URL
   In order to get access of the Application features
@@ -14,13 +13,13 @@
   @regression
   Scenario: 
     User is on the enthrall IT Homepage URL
+
     When User click on Login Button navigated to Login Page
     And User enter Email in the Email field
     And User enter Password in the Password field
     And User finally click on Login Button
     Then User will navigate to DashBoard Page
-    
- 
+
   @sanity
   Scenario: Login with fixed valid credentials
     When User click on Login Button navigated to Login Page
@@ -38,7 +37,8 @@
     Then User will navigate to DashBoard Page
 
     Examples: 
-      | UserId                     | Password          |
-      | 'mizimuktar0@gmail.com'    | 'password$1'      |
-      | 'ayshasiddqua26@gmail.com' | 'Faizan2026#'     |
-      | 'mariabegum2121'           | 'saimun388556Bd@' |
+      |             email                       |         password          |
+      | 'mizimuktar0@gmail.com'      | 'password$1'           |
+      | 'ayshasiddqua26@gmail.com' | 'Faizan2026#'          |
+      | 'mariabegum2121'                | 'saimun388556Bd@' |
+         

@@ -1,45 +1,47 @@
 package stepDefinition;
 
+import org.junit.Assert;
+
 import baseUtil.BaseClass;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import pages.LogIn;
+import pages.Enrollment_process;
 
 public class EnrollnowStepDefinition extends BaseClass {
 
-	@Given("User puting value in each field Click Login Button to navigate to Dashboard page")
-    public void userPutingValueInEachFieldClickLoginButtonToNavigateToDashboardPage() {
-		enrollment_process.landing_on_dashboard();
-		
-	}
+    Enrollment_process enrollment_process;
 
-	@When("User Click on Automation to navigate to Automation page")
-	public void userClickOnAutomationToNavigateToAutomationPage() {
-       enrollment_process.step_one_Click_on_automation_to_navigate_to_automation_page();
-	}
+    @Given("the user is on the Enthrall IT homepage")
+    public void theUserIsOnTheEnthrallITHomepage() {
+        driver.get("URL_of_Enthrall_IT_homepage");
+        enrollment_process.landing_on_dashboard();
+    }
 
-	@When("User Click Enroll Now to navigate to enrollhome page")
-	public void userClickEnrollNowToNavigateToEnrollhomePage() {
-		enrollment_process.click_enroll_Now_to_navigate_to_enrollhome_page();
-		
+    @When("the user clicks on the {string} tab to navigate to the Automation page")
+    public void theUserClicksOnTheTabToNavigateToTheAutomationPage(String tabName) {
+        enrollment_process.step_one_Click_on_automation_to_navigate_to_automation_page();
+        
+    }
 
-	}
+    @When("the user clicks {string} to navigate to the Enrollment page")
+    public void theUserClicksToNavigateToTheEnrollmentPage(String buttonName) {
+       enrollment_process.click_enroll_Now_to_navigate_to_enrollhome_page();
+    }
 
-	@When("User Puting value in each field to enrollment process")
-	public void userPutingValueInEachFieldToEnrollmentProcess() {
-		enrollment_process.happy_path_puting_value_in_each_field_on_enroll_home_page();
+    @When("the user enters valid details in each required field for enrollment")
+    public void theUserEntersValidDetailsInEachRequiredFieldForEnrollment() {
+    	enrollment_process.happy_path_enters_valid_details_in_each_required_field_for_enrollment();;
+    }
 
-	}
+    @When("the user double-clicks on {string} to accept")
+    public void theUserDoubleClicksOnToAccept(String termsText) {
+        enrollment_process.acceptTerms();
+    }
 
-	@When("User Double Click on Terms and Condition to select Accept")
-	public void userDoubleClickOnTermsAndConditionToSelectAccept() {
-        enrollment_process.double_click_to_the_terms_and_condition();
-	}
-
-	@Then("User Click Submit Button it will navigate to Successfull Page")
-	public void userClickSubmitButtonItWillNavigateToSuccessfullPage() {
-        enrollment_process.navigate_to_Successful_page();
-	}
-
+    @Then("the user clicks the {string} button, and they are navigated to the success page")
+    public void theUserClicksTheButtonAndTheyAreNavigatedToTheSuccessPage(String buttonName) {
+        enrollment_process.submitEnrollment();
+        Assert.assertTrue("Enrollment success page was not displayed!", enrollment_process.is_Success_Page_Displayed());
+    }
 }

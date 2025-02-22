@@ -12,11 +12,11 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags = "@login",
+		tags =  "@sanity or @regression" ,
 		features = "src/test/java/feature",
-		glue = {"stepDefinition" , "baseUtil" }, 
-		//monochrome = true,
-		//dryRun = false,
+		glue = {"stepDefinition", "baseUtil" },
+		monochrome = true,
+		dryRun = false,
 		plugin = {"pretty", "html:target/report.html", "json:target/report.json", "junit:target/report.xml"}
 		)
 public class TestRunner {
