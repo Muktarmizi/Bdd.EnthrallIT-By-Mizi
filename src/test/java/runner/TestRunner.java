@@ -9,7 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags =  "@smoke or @sanity or @regression or @login" ,
+		tags = "@enrollment or @login",
 		features = "src/test/java/feature",
 		glue = {"stepDefinition", "baseUtil" },
 		monochrome = false,
@@ -17,8 +17,11 @@ import io.cucumber.junit.CucumberOptions;
 		plugin = {"pretty", "html:target/report.html", "json:target/report.json", "junit:target/report.xml"}
 		)
 public class TestRunner {
+	
 
 }
+
+
 
 
 /*

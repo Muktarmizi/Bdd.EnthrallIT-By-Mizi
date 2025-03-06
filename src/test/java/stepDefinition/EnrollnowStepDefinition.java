@@ -10,38 +10,56 @@ import pages.Enrollment_process;
 
 public class EnrollnowStepDefinition extends BaseClass {
 
-    Enrollment_process enrollment_process;
+	@Given("User is on the Enthrall IT Homepage URL")
+	public void userIsOnTheEnthrallITHomepageURL() {
+		enrollment_process.logo_and_title_validation();
+	}
 
-    @Given("the user is on the Enthrall IT homepage")
-    public void theUserIsOnTheEnthrallITHomepage() {
-        driver.get("URL_of_Enthrall_IT_homepage");
-        enrollment_process.landing_on_dashboard();
-    }
+	@When("User click on the Login Button navigated to Login Page")
+	public void userClickOnTheLoginButtonNavigatedToLoginPage() {
+		enrollment_process.click_login_from_menu_section();
+	}
 
-    @When("the user clicks on the {string} tab to navigate to the Automation page")
-    public void theUserClicksOnTheTabToNavigateToTheAutomationPage(String tabName) {
-        enrollment_process.step_one_Click_on_automation_to_navigate_to_automation_page();
-        
-    }
+	@When("User enters valid credentials and click on the Login Button")
+	public void userEntersValidCredentialsAndClickOnTheLoginButton() {
+		enrollment_process.email();
+		enrollment_process.password();
+		enrollment_process.click_login_button();
+	}
 
-    @When("the user clicks {string} to navigate to the Enrollment page")
-    public void theUserClicksToNavigateToTheEnrollmentPage(String buttonName) {
-       enrollment_process.click_enroll_Now_to_navigate_to_enrollhome_page();
-    }
+	@Then("User should be navigated to Dashboard")
+	public void userShouldBeNavigatedToDashboard() {
+		enrollment_process.landing_on_dashboard();
+	}
 
-    @When("the user enters valid details in each required field for enrollment")
-    public void theUserEntersValidDetailsInEachRequiredFieldForEnrollment() {
-    	enrollment_process.happy_path_enters_valid_details_in_each_required_field_for_enrollment();;
-    }
+	@When("User click on the Automation section")
+	public void userClickOnTheAutomationSection() {
+		enrollment_process.click_Automation();
+	}
 
-    @When("the user double-clicks on {string} to accept")
-    public void theUserDoubleClicksOnToAccept(String termsText) {
-        enrollment_process.acceptTerms();
-    }
+	@Then("User should be navigated to the EnrollNow Automation Page")
+	public void userShouldBeNavigatedToTheEnrollNowAutomationPage() {
+		enrollment_process.navigated_to_Automation_page();
+	}
 
-    @Then("the user clicks the {string} button, and they are navigated to the success page")
-    public void theUserClicksTheButtonAndTheyAreNavigatedToTheSuccessPage(String buttonName) {
-        enrollment_process.submitEnrollment();
-    }
-    //Assert.assertTrue("Enrollment success page was not displayed!", enrollment_process.is_Success_Page_Displayed());
+	@When("User click on the EnrollNow Button")
+	public void userClickOnTheEnrollNowButton() {
+		enrollment_process.click_enroll_Now_to_navigate_to_enrollhome_page();
+	}
+
+	@Then("User should be navigated to the Enroll home page")
+	public void userShouldBeNavigatedToTheEnrollHomePage() {
+		enrollment_process.navigated_to_the_Enroll_home_page();
+	}
+
+	@When("User fills in all required fields and click on the Submit Button")
+	public void userFillsInAllRequiredFieldsAndClickOnTheSubmitButton() {
+		enrollment_process.happy_path_to_automation_then_click_enroll_now_then_input_all_information();
+	}
+
+	@Then("User should be navigated to the successful enrollment page")
+	public void userShouldBeNavigatedToTheSuccessfulEnrollmentPage() {
+		enrollment_process.is_Success_Page_Displayed();
+	}
+
 }

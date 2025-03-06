@@ -16,7 +16,7 @@ Feature: Log In
 
     When User click on Login Button navigated to Login Page
     And User enter Email in the Email field
-    And User enter Password in the Password field
+    And User enter password in the password field
     And User finally click on Login Button
     Then User will navigate to DashBoard Page
 
@@ -37,12 +37,7 @@ Feature: Log In
     Then User will navigate to DashBoard Page
 
     Examples: 
-      | UserId                                   |     Password            |
-      | 'Mizimuktar0@gmail.com'          | 'password$1'           |
-      | 'ayshasiddqua26@gmail.com'    | 'Faizan2026#'          |
-      | 'mariabegum2121@gmail.com'   | 'saimun388556Bd@' |
-      
-      
-      
-      
-      
+      | UserId                                | Password       |
+      | 'Mizimuktar0@gmail.com'      | 'password$1'   |
+      | 'Ayshasiddqua26@gmail.com' | 'Faizan2026#' |
+      | 'rubuait525@gmail.com'        | 'Password$1'   |

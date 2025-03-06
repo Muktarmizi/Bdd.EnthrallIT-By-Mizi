@@ -1,63 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="Cucumber" time="4.574" tests="6" skipped="0" failures="0" errors="0">
-<testcase classname="User Enrollment" name="Successful User Enrollment" time="0.397">
+<testsuite name="Cucumber" time="120.707" tests="1" skipped="0" failures="0" errors="0">
+<testcase classname="User Enrollment  Process in Enthrall IT" name="Successful User Enrollment" time="120.121">
 <system-out><![CDATA[
-Given the user is on the Enthrall IT homepage...............................passed
-When the user clicks on the "Automation" tab to navigate to the Automation page.passed
-And the user clicks "Enroll Now" to navigate to the Enrollment page.........passed
-And the user enters valid details in each required field for enrollment.....passed
-And the user double-clicks on "Terms and Conditions" to accept..............passed
-Then the user clicks the "Submit" button, and they are navigated to the success page.passed
-]]></system-out>
-</testcase>
-<testcase classname="Log In" name="" time="0.112">
-<system-out><![CDATA[
-Given User is on the enthrall IT Homepage URL...............................passed
-When User click on Login Button navigated to Login Page.....................passed
-And User enter Email in the Email field.....................................passed
-And User enter Password in the Password field...............................passed
-And User finally click on Login Button......................................passed
-Then User will navigate to DashBoard Page...................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Log In" name="Login with fixed valid credentials" time="0.046">
-<system-out><![CDATA[
-Given User is on the enthrall IT Homepage URL...............................passed
-When User click on Login Button navigated to Login Page.....................passed
-When User enter UserId as 'Mizimuktar0@gmail.com'...........................passed
-And User enter Password as 'Password$1'.....................................passed
-And User finally click on Login Button......................................passed
-Then User will navigate to DashBoard Page...................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Log In" name="Login with Sets of valid credentials - #1.1" time="0.016">
-<system-out><![CDATA[
-Given User is on the enthrall IT Homepage URL...............................passed
-When User click on Login Button navigated to Login Page.....................passed
-When User enter UserId  as 'Mizimuktar0@gmail.com'..........................passed
-And User enter Password as 'password$1'.....................................passed
-And User finally click on Login Button......................................passed
-Then User will navigate to DashBoard Page...................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Log In" name="Login with Sets of valid credentials - #1.2" time="0.043">
-<system-out><![CDATA[
-Given User is on the enthrall IT Homepage URL...............................passed
-When User click on Login Button navigated to Login Page.....................passed
-When User enter UserId  as 'ayshasiddqua26@gmail.com'.......................passed
-And User enter Password as 'Faizan2026#'....................................passed
-And User finally click on Login Button......................................passed
-Then User will navigate to DashBoard Page...................................passed
-]]></system-out>
-</testcase>
-<testcase classname="Log In" name="Login with Sets of valid credentials - #1.3" time="0.025">
-<system-out><![CDATA[
-Given User is on the enthrall IT Homepage URL...............................passed
-When User click on Login Button navigated to Login Page.....................passed
-When User enter UserId  as 'mariabegum2121@gmail.com'.......................passed
-And User enter Password as 'saimun388556Bd@'................................passed
-And User finally click on Login Button......................................passed
-Then User will navigate to DashBoard Page...................................passed
+Given User is on the Enthrall IT Homepage URL...............................passed
+When User click on the Login Button navigated to Login Page.................passed
+When User enters valid credentials and click on the Login Button............passed
+Then User should be navigated to Dashboard..................................passed
+When User click on the Automation section...................................passed
+Then User should be navigated to the EnrollNow Automation Page..............passed
+When User click on the EnrollNow Button.....................................passed
+Then User should be navigated to the Enroll home page.......................passed
+When User fills in all required fields and click on the Submit Button.......passed
+Then User should be navigated to the successful enrollment page.............passed
 ]]></system-out>
 </testcase>
 </testsuite>
