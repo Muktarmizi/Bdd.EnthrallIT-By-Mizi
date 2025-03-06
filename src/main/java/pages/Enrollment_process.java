@@ -3,6 +3,7 @@ package pages;
 import static common.CommonActions.clickElement;
 import static common.CommonActions.clickElementThenTab;
 import static common.CommonActions.clickUsingJavascriptExecutor;
+import static common.CommonActions.elementDisplayed;
 //import static common.CommonActions.findYourNameFromTheTable;
 import static common.CommonActions.inputText;
 import static common.CommonActions.inputTextThenClickTab;
@@ -21,9 +22,11 @@ import static common.CommonActions.verifyErrorMessageUnderTheField;
 import static common.CommonActions.verifyLengthOfTheFieldContent;
 import static common.CommonActions.verifyTextOfTheWebElement;
 import static common.CommonActions.verifyTitle;
+import static common.CommonActions.elementEnabled;
+import static common.CommonActions.elementDisplayed;
 import static utils.IConstant.password;
 import static utils.IConstant.user_id;
-
+import static common.CommonActions.*;
 import java.io.File;
 import java.security.PublicKey;
 import java.time.Duration;
@@ -38,11 +41,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import constants.Attribute;
-
+import constants.Attribute.*;
 
 public class Enrollment_process {
-	
+
 	WebDriver driver;
 	WebDriverWait wait;
 
@@ -57,7 +59,7 @@ public class Enrollment_process {
 
 	@FindBy(id = "login-link")
 	WebElement loginElement;
-	
+
 	@FindBy(xpath = "//a[@id='login-link' and @class='nav-link']")
 	WebElement loginHeader;
 
@@ -163,7 +165,7 @@ public class Enrollment_process {
 	@FindBy(xpath = "(//a[text()='Click'])[5]")
 	WebElement gitHubElement;
 
-	@FindBy(xpath = "//span[text()='Automation']")
+	@FindBy(xpath = "//i[@class='fa fa-cogs']")
 	WebElement automation;
 
 	@FindBy(xpath = "//h3[text()='Automation']")
@@ -397,7 +399,10 @@ public class Enrollment_process {
 	@FindBy(xpath = "//*[@id='email_error']")
 	WebElement emailRequiredField;
 
-	@FindBy(id = "//button[@id='submit_button']")
+	@FindBy(xpath = "//button[text()='Submit']")
+	WebElement submitbutton;
+
+	@FindBy(id = "submit_button")
 	WebElement submitEnrollPagElement;
 
 	@FindBy(xpath = "//h3[text()='Automation']")
@@ -426,280 +431,178 @@ public class Enrollment_process {
 
 	@FindBy(xpath = "//*[@id='home_address_error']")
 	WebElement home_Address_1_error;
-	
+
 	@FindBy(xpath = "//h1[text()='Registration Successful!']")
 	WebElement successsfull;
-	
 
-	
-	
-	public void landing_on_dashboard() {
-		clickElement(loginHeader);
-		inputTextThenClickTab(useremailElement, user_id);
+	@FindBy(xpath = "//h1[text()='Registration Successful!']")
+	WebElement Registration_Successful;
+
+	@FindBy(xpath = "//p[text()='Thank you for registering. You will receive a confirmation email shortly.']")
+	WebElement Thank_you_for_registering;
+
+	@FindBy(xpath = "//div[text()='English']")
+	WebElement english;
+
+	public void logo_and_title_validation() { // Enthrall IT Home Page.
+
+		// elementDisplayed(logoElement);
+		// clickElement(logoElement);
 		pause(1000);
+		verifyTitle(driver, "Enthrall IT");
+		verifyCurrentUrl(driver, "https://enthrallit.com/");
+
+	}
+
+	public void click_login_from_menu_section() { // Login page.
+
+		pause(1000);
+		clickElement(loginHeader);
+		verifyTitle(driver, "Enthrall IT");
+		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
+
+	}
+
+	public void email() {
+
+		inputTextThenClickTab(useremailElement, "mizimuktar0@gmail.com");
+		pause(1000);
+	}
+
+	public void password() {
+
 		inputTextThenClickTab(userpassElement, password);
 		pause(1000);
+	}
+
+	public void click_login_button() {
+
 		clickElement(loginbuttonElement);
-		pause(2000);
+		pause(1000);
+	}
+
+	public void landing_on_dashboard() { // Dashboard Page.
+
+		pause(1000);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/");
 
 	}
-	
 
+	public void click_Automation() { // Automation section.
 
-	public void step_one_Click_on_automation_to_navigate_to_automation_page() {
-
-		// Automation.
-		pause(2000);
+		elementEnabled(automation);
+		pause(1000);
 		clickElement(automation);
+
+	}
+
+	public void navigated_to_Automation_page() { // Automation Page.
+		pause(1000);
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/dashboard/automation/");
 		verifyTitle(driver, "Enthrall IT - Dashboard");
-		validationOfSubHeader(automationSubHeader, "Please choose from below");
 
-	
 	}
 
 	public void click_enroll_Now_to_navigate_to_enrollhome_page() {
 
-		pause(2000);
-		validationOfHeader(AutomationHeaderText, "Automation");
-		pause(2000);
-		validationOfSubHeader(automationSubHeader, "Please choose from below");
-		pause(2000);
+		pause(1000);
 		switchToChildWindow(driver, enroll);
-		pause(2000);
-	
+		pause(1000);
 
 	}
-	
-	public void happy_path_enters_valid_details_in_each_required_field_for_enrollment() {
-		
-		pause(2000);
+
+	public void navigated_to_the_Enroll_home_page() { // Enroll home Page
+
+		pause(1000);
+		verifyCurrentUrl(driver, "https://enthrallit.com/course/dashboard/enrolls/");
+		verifyTitle(driver, "Enthrall IT - Dashboard");
+	}
+
+	public void happy_path_to_automation_then_click_enroll_now_then_input_all_information() { // Enrollment.
+
 		clickElement(firstnameElement);
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(firstnameElement, "Shuvo");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(middlElement, "M");
-		pause(2000);
+		pause(1000);
 		inputText(lastElement, "Mirza");
-		pause(2000);
+		pause(1000);
 		selectElelementFromDropdownOnebyOne(selectProfession, selecProfessionList);
-		pause(2000);
+		pause(1000);
 		selectDropdown(selectProfession, "a Student");
-		pause(2000);
+		pause(1000);
 		selectElelementFromDropdownOnebyOne(selectCourse, selectCourseList);
-		pause(2000);
+		pause(1000);
 		selectDropdown(selectCourse, "Python");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(phoneNum, "9293306564");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(emailAdd, "MirzaShuvo79@gmail.com");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(passWordAdd, "Muktar2024$");
-		pause(2000);
+		pause(1000);
 		selectDropdown(Gender, "Male");
-		pause(2000);
+		pause(1000);
 		File file = new File("./image/Screenshot 2024-11-30 185110.png");
 		choosefile1.sendKeys(file.getAbsolutePath());
-		pause(2000);
+		pause(1000);
 		File file2 = new File("./image/Screenshot 2024-11-30 185141.png");
 		choosefile2.sendKeys(file.getAbsolutePath());
-		pause(2000);
+		pause(1000);
 		selectDropdown(selectBirthYear, "1989");
-		pause(2000);
+		pause(1000);
 		selectElelementFromDropdownOnebyOne(selectBirthMonth, selectBirthMonthList);
-		pause(2000);
+		pause(1000);
 		selectDropdown(selectBirthMonth, "December");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(selectBirthDay, "16");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(homeAddressL1, "2268 Seward Ave");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(homeAddressL2, "Apt 3");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(cityElement, "Bronx");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(stateElement, "New York");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(zipCodElement, "10473");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(immigrationElement, "Citizen");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(arrivalDateElement, "24th Jan 2013");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(emergencyElement, "9293306564");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(knowAboutUs, "Friends");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(highEducation, "Graduate");
-		pause(2000);
+		pause(1000);
 		inputTextThenClickTab(countryOriginElement, "Bangladesh");
-		pause(2000);
-		inputTextThenClickTab(selectLanguage, "English");
-		pause(2000);
+		pause(1000);
+		elementSelected(english);
+		pause(1000);
 		inputTextThenClickTab(signtureElement, "Shuvo M Mirza");
-		pause(2000);
-		
-		//Actions actions = new Actions(driver);
-		//actions.doubleClick(terms_and_condition).build().perform();
-		//pause(2000);
-		//clickElement(accept_Button);
-		//pause(2000);
-		//clickElement(submitEnrollPagElement);
-		//pause(2000);
-		
-	}
-	
-	
-
-	public void happy_path_to_automation_then_click_enroll_now_then_input_all_information() {
-
-		pause(2000);
-		clickElement(logoElement);
-		pause(2000);
-		clickElement(loginElement);
-		pause(2000);
-		useremailElement.clear();
-		useremailElement.sendKeys(user_id);
-		pause(2000);
-		clickElement(useremailElement);
-		pause(2000);
-		userpassElement.clear();
-		userpassElement.sendKeys(password);
-		pause(2000);
-		clickElement(userpassElement);
-		pause(2000);
-		clickElement(loginbuttonElement);
-		pause(3000);
-		clickElement(automationElement);
-		pause(2000);
-		switchToChildWindow(driver, enroll);
-		pause(2000);
-		clickElement(firstnameElement);
-		pause(2000);
-		inputTextThenClickTab(firstnameElement, "Shuvo");
-		pause(2000);
-		inputTextThenClickTab(middlElement, "M");
-		pause(2000);
-		inputText(lastElement, "Mirza");
-		pause(2000);
-		selectElelementFromDropdownOnebyOne(selectProfession, selecProfessionList);
-		pause(2000);
-		selectDropdown(selectProfession, "a Student");
-		pause(2000);
-		selectElelementFromDropdownOnebyOne(selectCourse, selectCourseList);
-		pause(2000);
-		selectDropdown(selectCourse, "Python");
-		pause(2000);
-		inputTextThenClickTab(phoneNum, "9293306564");
-		pause(2000);
-		inputTextThenClickTab(emailAdd, "MirzaShuvo79@gmail.com");
-		pause(2000);
-		inputTextThenClickTab(passWordAdd, "Muktar2024$");
-		pause(2000);
-		selectDropdown(Gender, "Male");
-		pause(2000);
-		File file = new File("./image/Screenshot 2024-11-30 185110.png");
-		choosefile1.sendKeys(file.getAbsolutePath());
-		pause(2000);
-		File file2 = new File("./image/Screenshot 2024-11-30 185141.png");
-		choosefile2.sendKeys(file.getAbsolutePath());
-		pause(2000);
-		selectDropdown(selectBirthYear, "1989");
-		pause(2000);
-		selectElelementFromDropdownOnebyOne(selectBirthMonth, selectBirthMonthList);
-		pause(2000);
-		selectDropdown(selectBirthMonth, "December");
-		pause(2000);
-		inputTextThenClickTab(selectBirthDay, "16");
-		pause(2000);
-		inputTextThenClickTab(homeAddressL1, "2268 Seward Ave");
-		pause(2000);
-		inputTextThenClickTab(homeAddressL2, "Apt 3");
-		pause(2000);
-		inputTextThenClickTab(cityElement, "Bronx");
-		pause(2000);
-		inputTextThenClickTab(stateElement, "New York");
-		pause(2000);
-		inputTextThenClickTab(zipCodElement, "10473");
-		pause(2000);
-		inputTextThenClickTab(immigrationElement, "Citizen");
-		pause(2000);
-		inputTextThenClickTab(arrivalDateElement, "24th Jan 2013");
-		pause(2000);
-		inputTextThenClickTab(emergencyElement, "9293306564");
-		pause(2000);
-		inputTextThenClickTab(knowAboutUs, "Friends");
-		pause(2000);
-		inputTextThenClickTab(highEducation, "Graduate");
-		pause(2000);
-		inputTextThenClickTab(countryOriginElement, "Bangladesh");
-		pause(2000);
-		inputTextThenClickTab(selectLanguage, "English");
-		pause(2000);
-		inputTextThenClickTab(signtureElement, "Shuvo M Mirza");
-		pause(2000);
+		pause(1000);
 		Actions actions = new Actions(driver);
 		actions.doubleClick(terms_and_condition).build().perform();
-		pause(2000);
+		pause(1000);
 		clickElement(accept_Button);
-		pause(2000);
+		pause(1000);
 		clickElement(submitEnrollPagElement);
-		pause(2000);
+		pause(1000);
 
 	}
 
-	
-	public void submitEnrollment() {
-		pause(2000);
-		clickElement(submitEnrollPagElement);
-		pause(2000);
-	}
-	
-	
-	public void acceptTerms() {
+	public void is_Success_Page_Displayed() { // Successful Page.
 
-		pause(2000);
-		//scrollIntoViewTheElementUsingJavascriptExecutor(driver, signtureElement);
-		pause(2000);
-		Actions actions = new Actions(driver);
-		actions.doubleClick(terms_and_condition).build().perform();
-		pause(2000);
-		clickElement(accept_Button);
-		pause(2000);
+		pause(1000);
+		verifyCurrentUrl(driver, "https://enthrallit.com/course/enroll/success/");
+		pause(1000);
+		verifyTitle(driver, "Registration Success");
+		pause(1000);
 
 	}
-	
-	public boolean is_Success_Page_Displayed() {
-	    pause(2000); // Pause if needed, but better to use explicit waits
 
-	    // Verify if the current URL is correct
-	    String expectedUrl = "https://enthrallit.com/course/enroll/success/";
-	    String actualUrl = driver.getCurrentUrl();
-	    if (!actualUrl.equals(expectedUrl)) {
-	        System.out.println("URL mismatch! Expected: " + expectedUrl + ", but found: " + actualUrl);
-	        return false;
-	    }
-
-	    // Verify the page title
-	    String expectedTitle = "Registration Success";
-	    String actualTitle = driver.getTitle();
-	    if (!actualTitle.equals(expectedTitle)) {
-	        System.out.println("Title mismatch! Expected: " + expectedTitle + ", but found: " + actualTitle);
-	        return false;
-	    }
-
-	    // Validate the success message
-	    String expectedSuccessMessage = "Registration Successful!";
-	    WebElement successMessageElement = driver.findElement(By.xpath("//h1[contains(text(),'Registration Successful!')]"));
-	    
-	    if (successMessageElement.isDisplayed() && successMessageElement.getText().equals(expectedSuccessMessage)) {
-	        return true;
-	    } else {
-	        System.out.println("Success message mismatch or not displayed!");
-	        return false;
-	    }
-	}
-
-	}
+}

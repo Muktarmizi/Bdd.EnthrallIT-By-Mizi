@@ -28,11 +28,11 @@ public class LogInStepDefinition extends BaseClass {
 	}
 
 	@When("User enter Email in the Email field")
-	public void user_enter_email_in_the_email_field() {
+	public void user_enter_Email_in_the_Email_field() {
 		logIn.email();
 	}
 
-	@When("User enter Password in the Password field")
+	@When("User enter password in the password field")
 	public void user_enter_password_in_the_password_field() {
 		logIn.password();
 	}
@@ -48,14 +48,19 @@ public class LogInStepDefinition extends BaseClass {
 		logIn.landing_on_dashboard();
 	}
 
-	@When("User enters email as {string}")
-	public void user_enters_email_as(String email) {
-	    logIn.emailId(email);
+	@When("User enter UserId as {string}")
+	public void userEnterUserIdAs(String string) {
+		logIn.emailId(string);
 	}
 
-	@When("User enters password as {string}")
-	public void user_enters_password_as(String password) {
-	    logIn.password(password);
+	@When("User enter Password as {string}")
+	public void userEnterPasswordAs(String string) {
+		logIn.password(string);
+	}
+
+	@When("User enter UserId  as {string}")
+	public void userEnterUserId(String string) {
+		logIn.emailId(string);
 	}
 
 }

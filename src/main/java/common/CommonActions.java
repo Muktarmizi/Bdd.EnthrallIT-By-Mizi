@@ -6,8 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import org.openqa.selenium.StaleElementReferenceException;
 import java.util.Set;
+
+import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -19,20 +21,59 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import com.google.common.io.Files;
+
 import constants.Attribute;
 
-
 public class CommonActions {
-	static Logger logger = LoggerFactory.getLogger(CommonActions.class);
+	  private static Logger logger = LoggerFactory.getLogger(CommonActions.class);
 	WebDriver driver;
-	
+
 	public CommonActions(WebDriver driver) {
 		this.driver = driver;
 	}
-	
-	
+
 	public static void elementDisplayed(WebElement element) {
+		if (element == null) {
+			logger.error("WebElement is null. Cannot check if displayed.");
+			return;
+		}
+		try {
+			boolean isDisplayed = element.isDisplayed();
+			logger.info("Element {} is Displayed: {}", element, isDisplayed);
+		} catch (NoSuchElementException e) {
+			logger.error("Element {} is not displayed: {}", element, e.getMessage());
+		}
+	}
+
+	public static void elementEnabled(WebElement element) {
+		if (element == null) {
+			logger.error("WebElement is null. Cannot check if enabled.");
+			return;
+		}
+		try {
+			boolean isEnabled = element.isEnabled();
+			logger.info("Element {} is Enabled: {}", element, isEnabled);
+		} catch (NoSuchElementException e) {
+			logger.error("Element {} is not enabled: {}", element, e.getMessage());
+		}
+	}
+
+	public static void elementSelected(WebElement element) {
+		if (element == null) {
+			logger.error("WebElement is null. Cannot check if selected.");
+			return;
+		}
+		try {
+			boolean isSelected = element.isSelected();
+			logger.info("Element {} is Selected: {}", element, isSelected);
+		} catch (NoSuchElementException e) {
+			logger.error("Element {} is not selected: {}", element, e.getMessage());
+		}
+	}
+
+	public static void elementDisplayed1(WebElement element) {
 
 		try {
 			boolean flag = element.isDisplayed();
@@ -43,7 +84,7 @@ public class CommonActions {
 		}
 	}
 
-	public static void elementEnabled(WebElement element) {
+	public static void elementEnabled1(WebElement element) {
 		try {
 			boolean flag = element.isEnabled();
 			logger.info(element + "<---------> is Enabled, " + flag);
@@ -53,7 +94,7 @@ public class CommonActions {
 		}
 	}
 
-	public static void elementSelected(WebElement element) {
+	public static void elementSelected1(WebElement element) {
 		try {
 			boolean flag = element.isSelected();
 			logger.info(element + "<---------> is Selected, " + flag);
@@ -68,23 +109,23 @@ public class CommonActions {
 		try {
 			String actualTitle = driver.getTitle();
 			logger.info("Actual Title is : " + actualTitle + " ---> And Expected Title is :" + expectedTitle);
-			// Assert
+			Assertions.assertEquals(actualTitle, expectedTitle, "Title doesn't match up");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			logger.info("Driver is not initiated properly Or Home Page Title doesn't match");			
+			logger.info("Driver is not initiated properly Or Home Page Title doesn't match");
 		}
 	}
 
 	public static void verifyCurrentUrl(WebDriver driver, String expectedURL) {
 		String currentURL = driver.getCurrentUrl();
 		logger.info("Current URL : " + currentURL + ", Expected URL : " + expectedURL);
-		////Assert.//AssertEquals("Current URL is not correct", expectedURL, currentURL);
+		Assertions.assertEquals(expectedURL, currentURL, "Current URL is not correct");
 	}
 
 	public static void verifyTextOfTheWebElement(WebElement element, String expected) {
 		String actual = element.getText();
 		logger.info(element + " ---> Actual text : " + actual + ". Expected text : " + expected);
-		//Assert.AssertEquals("Text In the WebElement doesn't match", expected, actual);
+		Assertions.assertEquals("Text In the WebElement doesn't match", expected, actual);
 	}
 
 	// common method for click ()
@@ -139,25 +180,24 @@ public class CommonActions {
 
 	public static void validationOfHeader(WebElement element, String expectedHeader) {
 		String actualHeader = element.getText();
-		////Assert.//AssertEquals("Header doesn't match", expectedHeader, actualHeader);
+		Assertions.assertEquals("Header doesn't match", expectedHeader, actualHeader);
 		logger.info(element + " ---> Actual Header : " + actualHeader + ". Expected Header : " + expectedHeader);
 	}
 
 	public static void validationOfSubHeader(WebElement element, String expectedSubHeader) {
 		String actualSubHeader = element.getText();
-		////Assert.//AssertEquals("Sub Header doesn't match", expectedSubHeader, actualSubHeader);
+		Assertions.assertEquals("Sub Header doesn't match", expectedSubHeader, actualSubHeader);
 		logger.info(element + " ---> Actual Sub Header : " + actualSubHeader + ". Expected SubHeader : "
 				+ expectedSubHeader);
 	}
 
 	public static void validationOfOtherHeader(WebElement element, String expectedOtherHeader) {
 		String actualOtherHeader = element.getText();
-		////Assert.//AssertEquals("Other Header doesn't match", expectedOtherHeader, actualOtherHeader);
+		Assertions.assertEquals("Other Header doesn't match", expectedOtherHeader, actualOtherHeader);
 		logger.info(element + " ---> Actual Other Header : " + actualOtherHeader + ". Expected Other Header : "
 				+ expectedOtherHeader);
 	}
 
-	
 	public static void inputTextThenClickTab(WebElement element, String input) {
 		try {
 			element.sendKeys(input, Keys.TAB);
@@ -165,11 +205,9 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
-
-	
 
 	public static void clearTextFromTheField(WebElement element) {
 		try {
@@ -178,7 +216,8 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			////Assert.fail();
+			Assert.fail();
+
 		}
 	}
 
@@ -194,7 +233,7 @@ public class CommonActions {
 		} catch (NullPointerException | NoSuchElementException e) { // elements er exception add korte hobe
 			e.printStackTrace();
 			logger.info(element + " : This element Not Found");
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -206,11 +245,9 @@ public class CommonActions {
 		} catch (NullPointerException | NoSuchElementException e) {
 			e.printStackTrace();
 			logger.info(element + " : This element Not Found");
-			////Assert.fail();
+			Assert.fail();
 		}
 	}
-
-	
 
 	public static void clickElementThenTab(WebElement element) {
 		try {
@@ -219,7 +256,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -230,7 +267,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -241,7 +278,7 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
@@ -259,7 +296,7 @@ public class CommonActions {
 	// very very important interview question
 	public void failText() {
 		logger.info(getClass().getMethods()[0].getName() + " ---> has failed");
-		//Assert.fail();
+		Assert.fail();
 	}
 
 	// very very important interview question
@@ -289,11 +326,12 @@ public class CommonActions {
 
 	/**
 	 * 
-	 * This method move to the child window after clicking the element on parent window
+	 * This method move to the child window after clicking the element on parent
+	 * window
 	 * 
 	 * @param driver
 	 * @param element
-	 * 	
+	 * 
 	 * 
 	 */
 	public static void switchToChildWindow(WebDriver driver, WebElement element) {
@@ -308,27 +346,30 @@ public class CommonActions {
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
 			logger.info(element + "<----------> has not been found\n" + e.getMessage());
-			//Assert.fail();
+			Assert.fail();
 		}
 	}
 
 	public static void clickUsingJavascriptExecutor(WebDriver driver, WebElement element) {
-		// JavascriptExecutor js = (JavascriptExecutor)driver; // instead of writing this 'js' object
+		// JavascriptExecutor js = (JavascriptExecutor)driver; // instead of writing
+		// this 'js' object
 		// we can write below one
 		((JavascriptExecutor) driver).executeScript("arguments[0].click()", element);
-		logger.info("JavascriptExecutor executing ..." + " arguments[0].click()" + " to click on element ---> " + element);
-	}	
-	
+		logger.info(
+				"JavascriptExecutor executing ..." + " arguments[0].click()" + " to click on element ---> " + element);
+	}
+
 	public static void inputTextUsingJavascriptExecutor(WebDriver driver, String script, WebElement element) {
 		((JavascriptExecutor) driver).executeScript(script, element);
 		logger.info("JavascriptExecutor executing ..." + script + " to input Text on element ---> " + element);
 	}
-	
+
 	public static void scrollIntoViewToTheElementUsingJavascriptExecutor(WebDriver driver, WebElement element) {
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-		logger.info("JavascriptExecutor executing ..." + " arguments[0].scrollIntoView(true)" + " to input Text on element ---> " + element);
-	}	
-		
+		logger.info("JavascriptExecutor executing ..." + " arguments[0].scrollIntoView(true)"
+				+ " to input Text on element ---> " + element);
+	}
+
 	// Attribute is coming from package constants, we will check the outcome later
 	// Why String type see next method
 	public static String getAttributeValue(WebElement element, Attribute attribute) {
@@ -336,100 +377,72 @@ public class CommonActions {
 		try {
 			String atr = attribute.getTheAttribute();
 			value = element.getAttribute(atr);
-			logger.info("Value for the attribute \"" + attribute + "\" in the WebElement " + element + " is executed and receive --> " + value);
+			logger.info("Value for the attribute \"" + attribute + "\" in the WebElement " + element
+					+ " is executed and receive --> " + value);
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
-			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			logger.info(element + "<----------> has not been found\n" + e.getMessage());
+			Assert.fail();
 		}
-		return value;		
+		return value;
+
 	}
-	
-	public static void verifyLengthOfTheFieldContent (WebElement element, Attribute attribute, String expectedLength) {
+
+	public static void verifyLengthOfTheFieldContent(WebElement element, Attribute attribute, String expectedLength) {
 		try {
 			String actualLength = getAttributeValue(element, Attribute.MAX_LENGTH);
-			logger.info("The field " + element + " ---> has Actual Length : " + actualLength + "and Expected Length : " + expectedLength);
-			//Assert.//AssertEquals(actualLength, expectedLength, "Length doesn't match");
+			logger.info("The field " + element + " ---> has Actual Length : " + actualLength + "and Expected Length : "
+					+ expectedLength);
+			Assertions.assertEquals(actualLength, expectedLength, "Length doesn't match");
+
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
-			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			logger.info(element + "<----------> has not been found\n" + e.getMessage());
+			Assert.fail();
 		}
 	}
-	
-	public static void verifyErrorMessageUnderTheField (WebElement element, Attribute attribute, String expectedErrorMessage) {
+
+	public static void verifyErrorMessageUnderTheField(WebElement element, Attribute attribute,
+			String expectedErrorMessage) {
 		try {
 			String actualErrorMessage = getAttributeValue(element, attribute);
-			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + "and Expected Error Message : " + expectedErrorMessage);
-			//Assert.//AssertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
+			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage
+					+ "and Expected Error Message : " + expectedErrorMessage);
+			Assertions.assertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
-			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			logger.info(element + "<----------> has not been found\n" + e.getMessage());
+			Assert.fail();
 		}
 	}
-	
-	public static void verifyErrorMessageOnTheTopOfThePage (WebElement element, Attribute attribute, String expectedErrorMessage) {
+
+	public static void verifyErrorMessageOnTheTopOfThePage(WebElement element, Attribute attribute,
+			String expectedErrorMessage) {
 		try {
 			String actualErrorMessage = getAttributeValue(element, attribute) + " is a required field.";
-			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage + " and Expected Error Message : " + expectedErrorMessage);
-			//Assert.//AssertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
+			logger.info("The Web Element " + element + " ---> has Actual Error Message : " + actualErrorMessage
+					+ " and Expected Error Message : " + expectedErrorMessage);
+			Assertions.assertEquals(actualErrorMessage, expectedErrorMessage, "Error Message doesn't match");
 		} catch (NoSuchElementException | NullPointerException e) {
 			e.printStackTrace();
-			logger.info(element + "<----------> has not been found\n" + e.getMessage() );
-			//Assert.fail();
+			logger.info(element + "<----------> has not been found\n" + e.getMessage());
+			Assert.fail();
 		}
 	}
-	
+
 	// The below is called Java doc [document]
-	
-			
+
 	/**
-	 * This method is used to upload any photo Image in a field by providing below as parameter
+	 * This method is used to upload any photo Image in a field by providing below
+	 * as parameter
 	 * 
 	 * @param element
 	 * @param location
 	 */
 	public static void uploadPhotoImage(WebElement element, String location) {
-		File file = new File(location);	
+		File file = new File(location);
 		element.sendKeys(file.getAbsolutePath());
-		pause(4000);		
-	}	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		pause(4000);
+	}
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-				
-		
-		
-		
-		
-						
 }

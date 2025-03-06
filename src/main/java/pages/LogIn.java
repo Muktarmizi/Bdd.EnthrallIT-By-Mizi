@@ -34,8 +34,6 @@ public class LogIn {
 		PageFactory.initElements(driver, this);
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
-	
-	
 
 	@FindBy(xpath = "//a[@id='logo-id']")
 	WebElement logoElement;
@@ -126,75 +124,61 @@ public class LogIn {
 	WebElement loginElement1;
 
 	public void logo_and_title_validation() {
+		// elementDisplayed(logoElement);
+		// clickElement(logoElement);
 		pause(2000);
-		elementDisplayed(logoElement);
-		clickElement(logoElement);
 		verifyTitle(driver, "Enthrall IT");
+		verifyCurrentUrl(driver, "https://enthrallit.com/");
 
 	}
 
 	public void click_login_from_menu_section() {
-
-		pause(2000);
-		elementEnabled(loginHeader);
+		pause(1000);
 		clickElement(loginHeader);
 		verifyTitle(driver, "Enthrall IT");
 		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		validationOfHeader(loginHeaderTextElement, "Login into your account");
 
 	}
 
 	public void email() {
 
-		clickElement(loginHeader);
-		pause(2000);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
-		inputTextThenClickTab(useremailElement,user_id);
+		inputTextThenClickTab(useremailElement, user_id);
 		pause(1000);
 	}
 
 	public void password() {
 
-		clickElement(loginHeader);
-		pause(2000);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
 		inputTextThenClickTab(userpassElement, password);
 		pause(1000);
 	}
-	
-	public void emailId(String email) {
-	    inputText(useremailElement, email);
-	    pause(2000);
+
+	public void emailId(String string) {
+		inputText(useremailElement, string);
+		pause(1000);
 	}
 
-	public void password(String password) {
-	    inputText(userpassElement, password);
-	    pause(2000);
+	public void password(String string) {
+		inputText(userpassElement, string);
+		pause(1000);
 	}
+
 	public void click_login_button() {
 
-		clickElement(loginHeader);
-		pause(2000);
-		verifyTitle(driver, "Enthrall IT");
-		verifyCurrentUrl(driver, "https://enthrallit.com/accounts/login/");
 		clickElement(loginbuttonElement);
-		pause(2000);
+		pause(1000);
 	}
 
 	public void landing_on_dashboard() {
 		clickElement(loginHeader);
-		inputTextThenClickTab(useremailElement, user_id);
+		inputTextThenClickTab(useremailElement, user_id); // User ID set in config.properties.
 		pause(1000);
-		inputTextThenClickTab(userpassElement, password);
+		inputTextThenClickTab(userpassElement, password); // Password set in config.properties.
 		pause(1000);
 		clickElement(loginbuttonElement);
-		pause(2000);
+		pause(1000);
 		verifyTitle(driver, "Enthrall IT - Dashboard");
 		verifyCurrentUrl(driver, "https://enthrallit.com/dashboard/");
 
 	}
-	
 
 }

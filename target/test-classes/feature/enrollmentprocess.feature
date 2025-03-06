@@ -1,20 +1,23 @@
 # Author: mizimuktar0@gmail.com
 # Date: 02/08/2025
 # Time: 10:02 PM
-
 @enrollment
-Feature: User Enrollment
-  As a user
-  I want to enroll as a new user in Enthrall IT
-  So that I can access the application's features
+Feature: User Enrollment  Process in Enthrall IT
+  As a user,  
+  I want to enroll in Enthrall IT,  
+  So that I can access the application features.
 
-  Background: User navigates to the Application URL
-    Given the user is on the Enthrall IT homepage
+  Background: User navigate to Application URL
+    Given User is on the Enthrall IT Homepage URL
 
   @sanity
   Scenario: Successful User Enrollment
-    When the user clicks on the "Automation" tab to navigate to the Automation page
-    And the user clicks "Enroll Now" to navigate to the Enrollment page
-    And the user enters valid details in each required field for enrollment
-    And the user double-clicks on "Terms and Conditions" to accept
-    Then the user clicks the "Submit" button, and they are navigated to the success page
+    When User click on the Login Button navigated to Login Page
+    When User enters valid credentials and click on the Login Button
+    Then User should be navigated to Dashboard
+    When User click on the Automation section
+    Then User should be navigated to the EnrollNow Automation Page
+    When User click on the EnrollNow Button
+    Then User should be navigated to the Enroll home page
+    When User fills in all required fields and click on the Submit Button
+    Then User should be navigated to the successful enrollment page
